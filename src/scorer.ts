@@ -26,10 +26,10 @@ export interface ScoreResult {
 // clustering and pronounceability are the strongest tells, so they carry
 // more weight than caps ratio (which real all-lowercase names can dodge).
 const METRIC_WEIGHTS: Record<string, number> = {
-  vowelDensity: 0.2,
-  consonantClustering: 0.3,
-  allCapsRatio: 0.2,
-  pronounceability: 0.3,
+  vowelDensity: 0.15,
+  consonantClustering: 0.25,
+  allCapsRatio: 0.25,
+  pronounceability: 0.35,
 };
 
 export function verdictFromScore(score: number): Verdict {
@@ -90,7 +90,7 @@ export function scoreConsonantClustering(name: string): MetricResult {
       longest = Math.max(longest, current);
     }
   }
-  const score = longest <= 2 ? 0 : longest === 3 ? 20 : Math.min(100, 20 + (longest - 3) * 30);
+  const score = longest <= 2 ? 0 : longest === 3 ? 20 : Math.min(100, 20 + (longest - 3) * 40);
 
   return {
     key: "consonantClustering",
@@ -137,6 +137,7 @@ const PRONOUNCEABLE_BIGRAMS = new Set([
   "lm", "lp", "ls", "lf", "rk", "rm", "rn", "rp", "rs", "lk", "sm", "sn",
   "sw", "tr", "dr", "br", "cr", "fr", "gr", "pr", "kr", "cl", "bl", "fl",
   "gl", "pl", "sl", "tw", "dw", "qu", "wr", "kn", "gn", "ps", "pn", "mn",
+  "rf", "rv", "lv", "rc", "lc", "nc", "rg", "lg",
 ]);
 
 /**
