@@ -1,5 +1,21 @@
-import { analyzeBrandName, type Verdict } from "./scorer";
+import { analyzeBrandName, classifyLetters, type Verdict } from "./scorer";
 import { decodeNameFromHash, encodeNameToHash } from "./urlState";
+
+// Per-letter fade-in staggers ~40ms/letter, capped so even a long name
+// finishes its reveal within ~600ms total (per docs/DESIGN.md).
+const LETTER_STAGGER_MS = 40;
+const MAX_LETTER_DELAY_MS = 480;
+
+function renderHighlightLayer(container: HTMLElement, value: string): void {
+  container.textContent = "";
+  classifyLetters(value).forEach(({ char, cls }, i) => {
+    const span = document.createElement("span");
+    span.className = `letter letter-${cls}`;
+    span.style.animationDelay = `${Math.min(i * LETTER_STAGGER_MS, MAX_LETTER_DELAY_MS)}ms`;
+    span.textContent = char;
+    container.appendChild(span);
+  });
+}
 
 const VERDICT_LABEL: Record<Verdict, string> = {
   checking: "checking…",
@@ -50,12 +66,15 @@ function renderApp(root: HTMLElement): void {
   `;
 
   const input = root.querySelector<HTMLInputElement>("#brand-input")!;
+  const highlightLayer = root.querySelector<HTMLElement>("#highlight-layer")!;
   const verdictEl = root.querySelector<HTMLElement>("#verdict")!;
   const metricsEl = root.querySelector<HTMLUListElement>("#metrics")!;
   const tessLink = root.querySelector<HTMLAnchorElement>("#tess-link")!;
 
   const update = () => {
     const result = analyzeBrandName(input.value);
+
+    renderHighlightLayer(highlightLayer, input.value);
 
     verdictEl.dataset.verdict = result.verdict;
     verdictEl.textContent = VERDICT_LABEL[result.verdict];
@@ -81,6 +100,9 @@ function renderApp(root: HTMLElement): void {
 
   input.value = decodeNameFromHash(location.hash);
   input.addEventListener("input", update);
+  input.addEventListener("scroll", () => {
+    highlightLayer.scrollLeft = input.scrollLeft;
+  });
   update();
 }
 
