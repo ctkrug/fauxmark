@@ -90,6 +90,23 @@ function renderApp(root: HTMLElement): void {
           Check this name on USPTO TESS →
         </a>
       </section>
+      <section class="how-it-works">
+        <h2>How this works</h2>
+        <p>
+          BrandCheck runs four linguistic heuristics against the name you
+          paste — no dictionary lookup, no trademark database, just
+          pattern-matching against how ordinary English brand names read and
+          sound. A high score means the name reads like a keyword-stuffed or
+          randomly generated Amazon listing name — it is a starting signal,
+          not a verdict on whether the name is trademarked or infringing.
+        </p>
+        <ul class="how-it-works-list">
+          <li><strong>Vowel density</strong> — real words land near 32-48% vowels.</li>
+          <li><strong>Consonant clustering</strong> — long consonant runs are rare in English.</li>
+          <li><strong>All-caps ratio</strong> — SHOUTY names are an Amazon keyword-stuffing tell.</li>
+          <li><strong>Pronounceability</strong> — awkward consonant pairs are hard to say aloud.</li>
+        </ul>
+      </section>
     </div>
   `;
 
