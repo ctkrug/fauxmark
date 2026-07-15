@@ -126,6 +126,11 @@ input[type="text"]:focus-visible {
   transition: color 160ms ease-out, border-color 160ms ease-out;
 }
 
+.verdict[data-verdict="insufficient"] {
+  color: var(--text-muted);
+  border-color: var(--text-muted);
+}
+
 .verdict[data-verdict="green"] {
   color: var(--success);
   border-color: var(--success);
