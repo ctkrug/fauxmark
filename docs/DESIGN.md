@@ -21,7 +21,7 @@ blueprint.
 | `--accent` | `#4fc3f7` | ink cyan — highlights, focus rings, active metric bars |
 | `--accent-support` | `#ffb74d` | amber — callouts, yellow verdict |
 | `--success` | `#4caf50` | green verdict |
-| `--danger` | `#ef5350` | red verdict |
+| `--danger` | `#f16b69` | red verdict |
 | Display font | **Space Grotesk** (Google Fonts) | wordmark, headings; system fallback `ui-sans-serif, system-ui` |
 | UI font | **JetBrains Mono** (Google Fonts) | body, labels, metric readouts, input; system fallback `ui-monospace, SFMono-Regular, Menlo, monospace` |
 | Spacing unit | 8px scale (8/16/24/32/48/64) | all padding/margin/gaps |
