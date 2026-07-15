@@ -72,6 +72,37 @@ a {
   color: var(--accent);
 }
 
+.letter {
+  animation: letter-reveal 160ms ease-out both;
+}
+
+.letter-vowel {
+  color: var(--accent);
+}
+
+.letter-consonant {
+  color: var(--text);
+}
+
+.letter-cluster {
+  color: var(--danger);
+}
+
+.letter-other {
+  color: var(--text-muted);
+}
+
+@keyframes letter-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .tagline {
   color: var(--text-muted);
   margin: 0;
@@ -95,21 +126,53 @@ label {
   letter-spacing: 0.06em;
 }
 
+.input-wrap {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid rgba(79, 195, 247, 0.25);
+  border-radius: var(--radius);
+  transition: box-shadow 160ms ease-out, border-color 160ms ease-out;
+}
+
+.input-wrap:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(79, 195, 247, 0.35);
+}
+
+.highlight-layer,
 input[type="text"] {
   font-family: var(--font-ui);
   font-size: 1.25rem;
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid rgba(79, 195, 247, 0.25);
-  border-radius: var(--radius);
+  line-height: 1.5;
+  margin: 0;
+  border: 0;
   padding: var(--space-2);
-  transition: box-shadow 160ms ease-out, border-color 160ms ease-out;
+  box-sizing: border-box;
+  width: 100%;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.highlight-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+input[type="text"] {
+  position: relative;
+  display: block;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--text);
+}
+
+input[type="text"]::placeholder {
+  color: var(--text-muted);
 }
 
 input[type="text"]:focus-visible {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 16px rgba(79, 195, 247, 0.35);
 }
 
 .verdict {
@@ -210,5 +273,7 @@ input[type="text"]:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   * {
     transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
   }
 }
