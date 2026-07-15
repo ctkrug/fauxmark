@@ -117,4 +117,18 @@ describe("analyzeBrandName", () => {
     const result = analyzeBrandName("KUAFYQ");
     expect(result.verdict).toBe("red");
   });
+
+  it("flags 1-2 letter input as insufficient signal, not a color verdict", () => {
+    expect(analyzeBrandName("a").verdict).toBe("insufficient");
+    expect(analyzeBrandName("ab").verdict).toBe("insufficient");
+  });
+
+  it("gives a confident verdict once input reaches 3 letters", () => {
+    expect(analyzeBrandName("abc").verdict).not.toBe("insufficient");
+  });
+
+  it("ignores non-alphabetic characters when counting letters for the threshold", () => {
+    expect(analyzeBrandName("7!7").verdict).toBe("checking");
+    expect(analyzeBrandName("a7!").verdict).toBe("insufficient");
+  });
 });
