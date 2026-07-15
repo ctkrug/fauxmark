@@ -103,16 +103,19 @@ function renderApp(root: HTMLElement): void {
 
     setVerdict(result.verdict);
 
-    metricsEl.innerHTML = result.metrics
-      .map(
-        (m) => `
-          <li class="metric-row">
-            <div class="meta"><span>${m.label}</span><span>${m.score}</span></div>
-            <div class="bar-track"><div class="bar-fill" style="width:${m.score}%"></div></div>
-          </li>
-        `,
-      )
-      .join("");
+    metricsEl.innerHTML = !result.input
+      ? `<li class="metrics-empty">Type a name above to see the vowel density, clustering, caps ratio, and pronounceability breakdown.</li>`
+      : result.metrics
+          .map(
+            (m) => `
+              <li class="metric-row">
+                <div class="meta"><span>${m.label}</span><span>${m.score}</span></div>
+                <div class="bar-track"><div class="bar-fill" style="width:${m.score}%"></div></div>
+                <p class="detail">${m.detail}</p>
+              </li>
+            `,
+          )
+          .join("");
 
     tessLink.href = result.input
       ? `${TESS_URL}?searchText=${encodeURIComponent(result.input)}`
