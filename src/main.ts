@@ -6,6 +6,12 @@ import { decodeNameFromHash, encodeNameToHash } from "./urlState";
 const LETTER_STAGGER_MS = 40;
 const MAX_LETTER_DELAY_MS = 480;
 
+// No real brand name is anywhere near this long (Amazon listing titles cap
+// around 200 characters). Bounding input length keeps the per-letter
+// highlight layer's DOM node count sane and stops a pasted wall of text
+// (or a maliciously huge shared link) from ballooning the URL hash.
+const MAX_INPUT_LENGTH = 200;
+
 function renderHighlightLayer(container: HTMLElement, value: string): void {
   container.textContent = "";
   classifyLetters(value).forEach(({ char, cls }, i) => {
@@ -72,6 +78,7 @@ function renderApp(root: HTMLElement): void {
                 placeholder="e.g. KUAFYQ"
                 autocomplete="off"
                 spellcheck="false"
+                maxlength="${MAX_INPUT_LENGTH}"
               />
             </div>
           </div>
@@ -146,7 +153,9 @@ function renderApp(root: HTMLElement): void {
     history.replaceState(null, "", `${location.pathname}${location.search}${hash}`);
   };
 
-  input.value = decodeNameFromHash(location.hash);
+  // maxlength only constrains typed/pasted input, not this programmatic
+  // assignment, so a crafted overlong shared link needs its own clamp.
+  input.value = decodeNameFromHash(location.hash).slice(0, MAX_INPUT_LENGTH);
   input.addEventListener("input", update);
   input.addEventListener("scroll", () => {
     highlightLayer.scrollLeft = input.scrollLeft;
