@@ -170,6 +170,42 @@ export function scorePronounceability(name: string): MetricResult {
   };
 }
 
+export type LetterClass = "vowel" | "consonant" | "cluster" | "other";
+
+export interface ClassifiedLetter {
+  char: string;
+  cls: LetterClass;
+}
+
+/**
+ * Classifies each character of the raw (un-lowercased) input for live
+ * letter-by-letter highlighting: vowel, plain consonant, consonant-cluster
+ * (a run of 3+ consecutive consonants — the same threshold that starts
+ * penalizing scoreConsonantClustering), or non-alphabetic ("other").
+ */
+export function classifyLetters(raw: string): ClassifiedLetter[] {
+  const chars = raw.split("");
+  const base: LetterClass[] = chars.map((ch) => {
+    if (!/[a-zA-Z]/.test(ch)) return "other";
+    return VOWELS.has(ch.toLowerCase()) ? "vowel" : "consonant";
+  });
+
+  let runStart = -1;
+  for (let i = 0; i <= base.length; i += 1) {
+    const isConsonant = i < base.length && base[i] === "consonant";
+    if (isConsonant) {
+      if (runStart === -1) runStart = i;
+    } else if (runStart !== -1) {
+      if (i - runStart >= 3) {
+        for (let j = runStart; j < i; j += 1) base[j] = "cluster";
+      }
+      runStart = -1;
+    }
+  }
+
+  return chars.map((char, i) => ({ char, cls: base[i] }));
+}
+
 export function analyzeBrandName(raw: string): ScoreResult {
   const input = normalizeInput(raw);
   const metrics: MetricResult[] = [
