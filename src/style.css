@@ -411,6 +411,78 @@ input[type="text"]:focus-visible {
   }
 }
 
+.faq {
+  border-top: 1px solid rgba(79, 195, 247, 0.15);
+  padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq h2 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.faq > p {
+  color: var(--text-muted);
+  max-width: 70ch;
+  margin: 0;
+}
+
+.faq-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq-list dt {
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: var(--space-1);
+}
+
+.faq-list dd {
+  margin: 0;
+  color: var(--text-muted);
+  max-width: 70ch;
+  padding-left: var(--space-2);
+  border-left: 1px solid rgba(79, 195, 247, 0.25);
+}
+
+.site-footer {
+  border-top: 1px solid rgba(79, 195, 247, 0.15);
+  padding-top: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: 0.9rem;
+}
+
+.footer-link {
+  text-decoration: none;
+  transition: color 160ms ease-out;
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+  text-decoration: underline;
+}
+
+.footer-muted {
+  color: var(--text-muted);
+}
+
+.footer-muted:hover,
+.footer-muted:focus-visible {
+  color: var(--accent);
+}
+
 @media (max-width: 480px) {
   .wordmark {
     font-size: 1.5rem;

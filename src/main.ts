@@ -102,20 +102,87 @@ function renderApp(root: HTMLElement): void {
       <section class="how-it-works">
         <h2>How this works</h2>
         <p>
-          BrandCheck runs four linguistic heuristics against the name you
-          paste — no dictionary lookup, no trademark database, just
-          pattern-matching against how ordinary English brand names read and
-          sound. A high score means the name reads like a keyword-stuffed or
-          randomly generated Amazon listing name — it is a starting signal,
-          not a verdict on whether the name is trademarked or infringing.
+          Fauxmark runs four linguistic heuristics against the name you paste.
+          No dictionary lookup, no trademark database, just pattern-matching
+          against how ordinary English brand names read and sound. A high score
+          means the name reads like a keyword-stuffed or randomly generated
+          Amazon listing name. It is a starting signal, not a verdict on whether
+          the name is trademarked or infringing.
         </p>
         <ul class="how-it-works-list">
-          <li><strong>Vowel density</strong> — real words land near 32-48% vowels.</li>
-          <li><strong>Consonant clustering</strong> — long consonant runs are rare in English.</li>
-          <li><strong>All-caps ratio</strong> — SHOUTY names are an Amazon keyword-stuffing tell.</li>
-          <li><strong>Pronounceability</strong> — awkward consonant pairs are hard to say aloud.</li>
+          <li><strong>Vowel density</strong> real words land near 32-48% vowels.</li>
+          <li><strong>Consonant clustering</strong> long consonant runs are rare in English.</li>
+          <li><strong>All-caps ratio</strong> SHOUTY names are an Amazon keyword-stuffing tell.</li>
+          <li><strong>Pronounceability</strong> awkward consonant pairs are hard to say aloud.</li>
         </ul>
       </section>
+      <section class="faq">
+        <h2>Is this a real brand on Amazon?</h2>
+        <p>
+          Real companies pick names a person can say and spell. Generated
+          pseudo-brands leave fingerprints in the string itself: vowel ratios
+          outside the normal band, long consonant runs, all-caps shouting, and
+          letter pairs no English speaker says on the first try. Fauxmark scores
+          those four signals so you can read the name the way you would read a
+          drawing against spec, then check the trademark before you trust it.
+        </p>
+        <dl class="faq-list">
+          <dt>How can I tell if a brand name on Amazon is real?</dt>
+          <dd>
+            Paste it above. A low score means the name reads like an ordinary
+            word or an established brand. A high score means it looks
+            machine-generated, which is a reason to check the seller and the
+            trademark before you buy. The score reads the name only, so pair it
+            with reviews and seller history.
+          </dd>
+          <dt>Is Fauxmark a fake Amazon brand checker?</dt>
+          <dd>
+            Yes, it is a free in-browser fake Amazon brand checker, but it reads
+            linguistic signal rather than a registry. It cannot tell you a name
+            is unregistered or counterfeit; it tells you whether the name looks
+            generated. Every result links straight to the USPTO trademark search
+            so you can confirm the real answer.
+          </dd>
+          <dt>What is an Amazon white-label or pseudo-brand name?</dt>
+          <dd>
+            Many sellers register a placeholder brand to meet Amazon's
+            brand-registry and listing rules, so names like KUAFYQ, Vensiono, or
+            MIDONE get generated to be unique and keyword-safe rather than
+            memorable. An Amazon white-label brand name check is exactly this:
+            flagging names that look assembled by a machine instead of chosen by
+            a person.
+          </dd>
+          <dt>Does a high score mean the product is a scam?</dt>
+          <dd>
+            No. A generated-looking name is common for legitimate budget and
+            private-label goods. Fauxmark measures how the name reads, not
+            product quality or seller trust. Treat it as one signal among the
+            reviews, the return policy, and the trademark record.
+          </dd>
+          <dt>Do you store the names I check?</dt>
+          <dd>
+            No. Everything runs in your browser with no backend. Nothing is sent
+            to a server, and the shareable link encodes the name in the URL
+            itself so you stay in control of it.
+          </dd>
+        </dl>
+      </section>
+      <footer class="site-footer">
+        <a
+          class="footer-link"
+          href="https://github.com/ctkrug/brandcheck"
+          target="_blank"
+          rel="noopener noreferrer"
+          >View Fauxmark on GitHub →</a
+        >
+        <a
+          class="footer-link footer-muted"
+          href="https://apps.charliekrug.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          >More by Charlie Krug → apps.charliekrug.com</a
+        >
+      </footer>
     </div>
   `;
 
