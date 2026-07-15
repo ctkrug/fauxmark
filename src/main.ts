@@ -1,4 +1,5 @@
 import { analyzeBrandName, type Verdict } from "./scorer";
+import { decodeNameFromHash, encodeNameToHash } from "./urlState";
 
 const VERDICT_LABEL: Record<Verdict, string> = {
   checking: "checking…",
@@ -64,8 +65,12 @@ function renderApp(root: HTMLElement): void {
     tessLink.href = result.input
       ? `${TESS_URL}?searchText=${encodeURIComponent(result.input)}`
       : TESS_URL;
+
+    const hash = encodeNameToHash(input.value);
+    history.replaceState(null, "", `${location.pathname}${location.search}${hash}`);
   };
 
+  input.value = decodeNameFromHash(location.hash);
   input.addEventListener("input", update);
   update();
 }
