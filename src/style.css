@@ -283,6 +283,17 @@ input[type="text"]:focus-visible {
   transition: width 200ms ease-out;
 }
 
+.metric-row .detail {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.metrics-empty {
+  color: var(--text-muted);
+  padding: var(--space-2) 0;
+}
+
 .cta {
   align-self: flex-start;
   border: 1px solid var(--accent);
