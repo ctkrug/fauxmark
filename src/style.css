@@ -222,6 +222,11 @@ input[type="text"]:focus-visible {
     transform 200ms ease-out;
 }
 
+.verdict.flip {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
 .verdict[data-verdict="insufficient"] {
   color: var(--text-muted);
   border-color: var(--text-muted);
