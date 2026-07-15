@@ -57,6 +57,10 @@ function renderApp(root: HTMLElement): void {
         Paste a brand name from an Amazon listing to see its pseudo-brand signal score.
       </p>
       <section class="panel">
+        <span class="corner corner-tl" aria-hidden="true"></span>
+        <span class="corner corner-tr" aria-hidden="true"></span>
+        <span class="corner corner-bl" aria-hidden="true"></span>
+        <span class="corner corner-br" aria-hidden="true"></span>
         <div class="input-row">
           <div class="input-field">
             <label for="brand-input">Brand name</label>
