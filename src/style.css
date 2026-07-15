@@ -54,7 +54,7 @@ a {
 
 .page {
   width: 100%;
-  max-width: 70ch;
+  max-width: min(920px, 92vw);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -106,6 +106,7 @@ a {
 .tagline {
   color: var(--text-muted);
   margin: 0;
+  max-width: 70ch;
 }
 
 .panel {
@@ -113,10 +114,36 @@ a {
   border: 1px solid rgba(79, 195, 247, 0.15);
   border-radius: var(--radius);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-  padding: var(--space-3);
+  padding: var(--space-4);
   display: flex;
   flex-direction: column;
+  gap: var(--space-4);
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: var(--space-3);
+}
+
+.input-field {
+  flex: 1 1 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+@media (max-width: 768px) {
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-field {
+    flex-basis: auto;
+  }
 }
 
 label {
@@ -142,11 +169,11 @@ label {
 .highlight-layer,
 input[type="text"] {
   font-family: var(--font-ui);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   line-height: 1.5;
   margin: 0;
   border: 0;
-  padding: var(--space-2);
+  padding: var(--space-2) var(--space-3);
   box-sizing: border-box;
   width: 100%;
   white-space: pre;
@@ -178,15 +205,21 @@ input[type="text"]:focus-visible {
 .verdict {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-1);
-  align-self: flex-start;
-  padding: var(--space-1) var(--space-2);
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: var(--space-1) var(--space-3);
   border-radius: var(--radius);
   border: 1px solid var(--text-muted);
   background: var(--surface-2);
   font-weight: 700;
   letter-spacing: 0.04em;
-  transition: color 160ms ease-out, border-color 160ms ease-out;
+  transition:
+    color 160ms ease-out,
+    border-color 160ms ease-out,
+    opacity 200ms ease-out,
+    transform 200ms ease-out;
 }
 
 .verdict[data-verdict="insufficient"] {
