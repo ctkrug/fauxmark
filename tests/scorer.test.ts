@@ -131,4 +131,10 @@ describe("analyzeBrandName", () => {
     expect(analyzeBrandName("7!7").verdict).toBe("checking");
     expect(analyzeBrandName("a7!").verdict).toBe("insufficient");
   });
+
+  it("never throws on digits, emoji, or punctuation", () => {
+    expect(() => analyzeBrandName("Nike99!")).not.toThrow();
+    expect(() => analyzeBrandName("🔥Brand🔥")).not.toThrow();
+    expect(() => analyzeBrandName("...---...")).not.toThrow();
+  });
 });
